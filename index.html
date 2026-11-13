@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leo Chen | AI Solutions Architect & Full-Stack Developer</title>
+  <meta name="description" content="Leo Chen 的個人網站 - 專注於生成式 AI 應用開發、全端架構與自動化流程設計">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Marked for markdown parsing in chat -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+            },
+            dark: {
+              800: '#1e293b',
+              900: '#0f172a',
+              950: '#020617',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0f172a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #475569;
+    }
+    .glass-card {
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .glass-nav {
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    @keyframes pulse-slow {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.05); }
+    }
+    .animate-pulse-slow {
+      animation: pulse-slow 8s infinite ease-in-out;
+    }
+  </style>
+</head>
+<body class="bg-dark-950 text-slate-100 font-sans antialiased selection:bg-brand-500 selection:text-white min-h-screen relative overflow-x-hidden">
+
+  <!-- Background Glow Orbs -->
+  <div class="fixed top-0 left-1/4 w-96 h-96 bg-brand-500/10 rounded-full blur-3xl pointer-events-none animate-pulse-slow"></div>
+  <div class="fixed bottom-1/3 right-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none animate-pulse-slow" style="animation-delay: 3s;"></div>
+
+  <!-- Navigation -->
+  <header class="fixed top-0 left-0 right-0 z-40 glass-nav transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-2 group">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-emerald-400 flex items-center justify-center font-bold text-lg text-white shadow-lg shadow-brand-500/20 group-hover:scale-105 transition-transform">
+          L
+        </div>
+        <div>
+          <span class="font-bold text-lg tracking-wide group-hover:text-brand-400 transition-colors">Leo Chen</span>
+          <span class="text-xs text-slate-400 block -mt-1">AI & Full-Stack</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+        <a href="#about" class="hover:text-brand-400 transition-colors">關於我</a>
+        <a href="#skills" class="hover:text-brand-400 transition-colors">專業技能</a>
+        <a href="#projects" class="hover:text-brand-400 transition-colors">精選專案</a>
+        <a href="#experience" class="hover:text-brand-400 transition-colors">經歷</a>
+        <a href="#contact" class="hover:text-brand-400 transition-colors">聯絡我</a>
+      </nav>
+
+      <!-- CTA Button -->
+      <div class="flex items-center gap-3">
+        <button onclick="toggleChat(true)" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-lg bg-brand-600 hover:bg-brand-500 text-white shadow-md shadow-brand-600/30 transition-all hover:shadow-brand-500/50 hover:-translate-y-0.5">
+          <i data-lucide="bot" class="w-4 h-4"></i>
+          <span>與 AI 助理對話</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="pt-36 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <div class="lg:col-span-7 space-y-6">
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-xs font-medium">
+          <span class="w-2 h-2 rounded-full bg-brand-500 animate-ping"></span>
+          <span>開放承接生成式 AI 與全端開發專案</span>
+        </div>
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
+          構建智慧與體驗並存的<br>
+          <span class="bg-gradient-to-r from-brand-400 via-emerald-300 to-cyan-400 bg-clip-text text-transparent">次世代 AI 解決方案</span>
+        </h1>
+        <p class="text-lg text-slate-400 leading-relaxed max-w-2xl">
+          嗨！我是 Leo Chen，一名熱愛探索前沿技術的 AI 架構師與全端工程師。專注於打造 LLM 智慧應用、跨平台自動化工作流、高擴展性雲端架構與絲滑的前端互動體驗。
+        </p>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-wrap gap-4 pt-2">
+          <a href="#projects" class="px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-medium shadow-lg shadow-brand-600/25 transition-all hover:-translate-y-0.5 flex items-center gap-2">
+            <span>瀏覽專案作品</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+          <button onclick="toggleChat(true)" class="px-6 py-3 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 text-slate-200 border border-slate-700 font-medium transition-all hover:-translate-y-0.5 flex items-center gap-2">
+            <i data-lucide="bot" class="w-4 h-4 text-brand-400"></i>
+            <span>詢問 AI 助理</span>
+          </button>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="grid grid-cols-3 gap-6 pt-8 border-t border-slate-800/80 max-w-lg">
+          <div>
+            <div class="text-2xl sm:text-3xl font-bold text-white">5+</div>
+            <div class="text-xs text-slate-400 mt-1">年開發經驗</div>
+          </div>
+          <div>
+            <div class="text-2xl sm:text-3xl font-bold text-white">30+</div>
+            <div class="text-xs text-slate-400 mt-1">成功交付專案</div>
+          </div>
+          <div>
+            <div class="text-2xl sm:text-3xl font-bold text-brand-400">99.8%</div>
+            <div class="text-xs text-slate-400 mt-1">客戶正面評價</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Visual Card -->
+      <div class="lg:col-span-5 flex justify-center">
+        <div class="relative w-full max-w-md">
+          <div class="absolute -inset-1.5 bg-gradient-to-r from-brand-500 to-cyan-500 rounded-3xl blur-xl opacity-30 group-hover:opacity-100 transition duration-1000"></div>
+          <div class="relative glass-card rounded-2xl p-6 sm:p-8 space-y-6">
+            <div class="flex items-center gap-4">
+              <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-500 to-emerald-700 flex items-center justify-center text-white text-2xl font-bold shadow-lg">
+                👨‍💻
+              </div>
+              <div>
+                <h3 class="text-lg font-bold text-white">Leo Chen</h3>
+                <p class="text-xs text-slate-400">AI Architect & Lead Engineer</p>
+                <div class="flex items-center gap-1.5 mt-1 text-xs text-emerald-400">
+                  <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                  <span>可立即投入新專案</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800 space-y-2 text-xs">
+              <div class="flex justify-between text-slate-400">
+                <span>目前研究領域</span>
+                <span class="text-brand-400 font-mono">Agentic AI & RAG</span>
+              </div>
+              <div class="flex justify-between text-slate-400">
+                <span>核心語言</span>
+                <span class="text-slate-200 font-mono">TypeScript / Python</span>
+              </div>
+              <div class="flex justify-between text-slate-400">
+                <span>雲端與自動化</span>
+                <span class="text-slate-200 font-mono">GAS / GCP / Serverless</span>
+              </div>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-brand-950/40 border border-brand-800/40 flex items-center justify-between text-xs">
+              <div class="flex items-center gap-2">
+                <i data-lucide="sparkles" class="w-4 h-4 text-brand-400"></i>
+                <span class="text-slate-300">右下角支援 OpenRouter Claude 智慧客服</span>
+              </div>
+              <span class="text-brand-400 font-semibold cursor-pointer hover:underline" onclick="toggleChat(true)">試試看 →</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-slate-800/60">
+    <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+      <h2 class="text-xs font-bold uppercase tracking-widest text-brand-400">About Me</h2>
+      <p class="text-3xl font-extrabold text-white">熱愛科技創新，專注解決真實痛點</p>
+      <p class="text-slate-400 text-sm">從底層演算法、全端工程到落地生根的生成式 AI 應用，致力於創造高價值產品。</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="glass-card p-6 rounded-2xl hover:border-slate-700 transition-all">
+        <div class="w-12 h-12 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center mb-4">
+          <i data-lucide="cpu" class="w-6 h-6"></i>
+        </div>
+        <h3 class="text-lg font-bold text-white mb-2">生成式 AI 落地</h3>
+        <p class="text-sm text-slate-400 leading-relaxed">
+          深入整合 OpenRouter、Anthropic Claude、OpenAI 與本地開源模型，打造具備思維推理（Reasoning）與工具調用（Function Calling）的企業級智能體。
+        </p>
+      </div>
+
+      <div class="glass-card p-6 rounded-2xl hover:border-slate-700 transition-all">
+        <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center mb-4">
+          <i data-lucide="layers" class="w-6 h-6"></i>
+        </div>
+        <h3 class="text-lg font-bold text-white mb-2">現代化全端架構</h3>
+        <p class="text-sm text-slate-400 leading-relaxed">
+          具備完整前後端全端視角，熟練 React、Vue、Node.js 與 Python，確保系統架構具備高可用性、可維護性與絕佳的操作流暢度。
+        </p>
+      </div>
+
+      <div class="glass-card p-6 rounded-2xl hover:border-slate-700 transition-all">
+        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4">
+          <i data-lucide="zap" class="w-6 h-6"></i>
+        </div>
+        <h3 class="text-lg font-bold text-white mb-2">雲端無伺服器與自動化</h3>
+        <p class="text-sm text-slate-400 leading-relaxed">
+          善用 Google Apps Script、Cloudflare Workers 與 Serverless 架構，極低成本快速實現自動化工作流與第三方系統整合。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-slate-800/60">
+    <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+      <h2 class="text-xs font-bold uppercase tracking-widest text-brand-400">Technical Skills</h2>
+      <p class="text-3xl font-extrabold text-white">專業技術棧與工具生態</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- AI & LLMs -->
+      <div class="glass-card p-5 rounded-2xl">
+        <h3 class="text-sm font-bold text-brand-400 uppercase tracking-wider mb-4 flex items-center gap-2">
+          <i data-lucide="brain" class="w-4 h-4"></i> AI & 智慧模型
+        </h3>
+        <ul class="space-y-2 text-sm text-slate-300">
+          <li class="flex items-center justify-between"><span>OpenRouter API</span><span class="text-xs text-brand-400">專家</span></li>
+          <li class="flex items-center justify-between"><span>Claude 3.5 / Haiku</span><span class="text-xs text-brand-400">專家</span></li>
+          <li class="flex items-center justify-between"><span>GPT-4 / Reasoning</span><span class="text-xs text-slate-400">精通</span></li>
+          <li class="flex items-center justify-between"><span>RAG 知識庫檢索</span><span class="text-xs text-slate-400">精通</span></li>
+          <li class="flex items-center justify-between"><span>Prompt Engineering</span><span class="text-xs text-brand-400">專家</span></li>
+        </ul>
+      </div>
+
+      <!-- Frontend -->
+      <div class="glass-card p-5 rounded-2xl">
+        <h3 class="text-sm font-bold text-blue-400 uppercase tracking-wider mb-4 flex items-center gap-2">
+          <i data-lucide="code" class="w-4 h-4"></i> 前端開發
+        </h3>
+        <ul class="space-y-2 text-sm text-slate-300">
+          <li class="flex items-center justify-between"><span>TypeScript / JavaScript</span><span class="text-xs text-blue-400">專家</span></li>
+          <li class="flex items-center justify-between"><span>React / Next.js</span><span class="text-xs text-blue-400">精通</span></li>
+          <li class="flex items-center justify-between"><span>Tailwind CSS</span><span class="text-xs text-blue-400">專家</span></li>
+          <li class="flex items-center justify-between"><span>Vue.js</span><span class="text-xs text-slate-400">精通</span></li>
+          <li class="flex items-center justify-between"><span>HTML5 / Responsive</span><span class="text-xs text-blue-400">專家</span></li>
+        </ul>
+      </div>
+
+      <!-- Backend & Cloud -->
+      <div class="glass-card p-5 rounded-2xl">
+        <h3 class="text-sm font-bold text-purple-400 uppercase tracking-wider mb-4 flex items-center gap-2">
+          <i data-lucide="server" class="w-4 h-4"></i> 後端與無伺服器
+        </h3>
+        <ul class="space-y-2 text-sm text-slate-300">
+          <li class="flex items-center justify-between"><span>Google Apps Script</span><span class="text-xs text-purple-400">專家</span></li>
+          <li class="flex items-center justify-between"><span>Python / FastAPI</span><span class="text-xs text-purple-400">精通</span></li>
+          <li class="flex items-center justify-between"><span>Node.js / Express</span><span class="text-xs text-slate-400">精通</span></li>
+          <li class="flex items-center justify-between"><span>RESTful / JSON-RPC</span><span class="text-xs text-purple-400">專家</span></li>
+          <li class="flex items-center justify-between"><span>PostgreSQL / Redis</span><span class="text-xs text-slate-400">精通</span></li>
+        </ul>
+      </div>
+
+      <!-- Tools & DevOps -->
+      <div class="glass-card p-5 rounded-2xl">
+        <h3 class="text-sm font-bold text-emerald-400 uppercase tracking-wider mb-4 flex items-center gap-2">
+          <i data-lucide="wrench" class="w-4 h-4"></i> 開發工具與維運
+        </h3>
+        <ul class="space-y-2 text-sm text-slate-300">
+          <li class="flex items-center justify-between"><span>Git / GitHub Pages</span><span class="text-xs text-emerald-400">專家</span></li>
+          <li class="flex items-center justify-between"><span>GitHub Actions (CI/CD)</span><span class="text-xs text-slate-400">精通</span></li>
+          <li class="flex items-center justify-between"><span>Docker Container</span><span class="text-xs text-slate-400">精通</span></li>
+          <li class="flex items-center justify-between"><span>Model Context Protocol</span><span class="text-xs text-emerald-400">精通</span></li>
+          <li class="flex items-center justify-between"><span>Cloudflare</span><span class="text-xs text-slate-400">熟悉</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Projects -->
+  <section id="projects" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-slate-800/60">
+    <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+      <h2 class="text-xs font-bold uppercase tracking-widest text-brand-400">Portfolio</h2>
+      <p class="text-3xl font-extrabold text-white">精選專案作品</p>
+      <p class="text-slate-400 text-sm">真實商業場景與技術創新的結合，展示架構設計與完整交付能力。</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Project 1 -->
+      <div class="glass-card rounded-2xl overflow-hidden hover:border-slate-700 transition-all group">
+        <div class="h-44 bg-gradient-to-tr from-brand-900/60 to-slate-800 flex items-center justify-center p-6 border-b border-slate-800">
+          <div class="p-4 rounded-2xl bg-brand-500/10 text-brand-400 group-hover:scale-110 transition-transform">
+            <i data-lucide="bot" class="w-12 h-12"></i>
+          </div>
+        </div>
+        <div class="p-6 space-y-4">
+          <div class="flex items-center justify-between text-xs">
+            <span class="text-brand-400 font-semibold">生成式 AI / 智慧客服</span>
+            <span class="text-slate-500">2026</span>
+          </div>
+          <h3 class="text-lg font-bold text-white group-hover:text-brand-400 transition-colors">
+            智慧 AI 客服與思維推理助理
+          </h3>
+          <p class="text-sm text-slate-400 leading-relaxed">
+            整合 OpenRouter Claude Haiku 5.5 模型與 Google Apps Script 無伺服器後端，支援多輪對話歷史上下文與即時思考鏈（Reasoning Details）解析。
+          </p>
+          <div class="flex flex-wrap gap-1.5 pt-2">
+            <span class="px-2 py-0.5 rounded-md bg-slate-800 text-slate-300 text-xs font-mono">OpenRouter</span>
+            <span class="px-2 py-0.5 rounded-md bg-slate-800 text-slate-300 text-xs font-mono">GAS</span>
+            <span class="px-2 py-0.5 rounded-md bg-slate-800 text-slate-300 text-xs font-mono">Claude</span>
+            <span class="px-2 py-0.5 rounded-md bg-slate-800 text-slate-300 text-xs font-mono">Tailwind</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="glass-card rounded-2xl overflow-hidden hover:border-slate-700 transition-all group">
+        <div class="h-44 bg-gradient-to-tr from-blue-900/60 to-slate-800 flex items-center justify-center p-6 border-b border-slate-800">
+          <div class="p-4 rounded-2xl bg-blue-500/10 text-blue-400 group-hover:scale-110 transition-transform">
+            <i data-lucide="bar-chart-3" class="w-12 h-12"></i>
+          </div>
+        </div>
+        <div class="p-6 space-y-4">
+          <div class="flex items-center justify-between text-xs">
+            <span class="text-blue-400 font-semibold">商業智慧 / 數據視覺化</span>
+            <span class="text-slate-500">2025</span>
+          </div>
+          <h3 class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors">
+            自動化數據分析與指標監控看板
+          </h3>
+          <p class="text-sm text-slate-400 leading-relaxed">
+            透過排程任務自各平台 API 採集業務營運數據，結合大語言模型自動生成每週總結洞察報告，節省 80% 的人工整理時間。
+          </p>
+          <div class="flex flex-wrap gap-1.5 pt-2">
+            <span class="px-2 py-0.5 rounded-md bg-slate-800 text-slate-300 text-xs font-mono">TypeScript</span>
+            <span class="px-2 py-0.5 rounded-md bg-slate-800 text-slate-300 text-xs font-mono">FastAPI</span>
+            <span class="px-2 py-0.5 rounded-md bg-slate-800 text-slate-300 text-xs font-mono">Chart.js</span>
+            <span class="px-2 py-0.5 rounded-md bg-slate-800 text-slate-300 text-xs font-mono">PostgreSQL</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="glass-card rounded-2xl overflow-hidden hover:border-slate-700 transition-all group">
+        <div class="h-44 bg-gradient-to-tr from-purple-900/60 to-slate-800 flex items-center justify-center p-6 border-b border-slate-800">
+          <div class="p-4 rounded-2xl bg-purple-500/10 text-purple-400 group-hover:scale-110 transition-transform">
+            <i data-lucide="git-merge" class="w-12 h-12"></i>
+          </div>
+        </div>
+        <div class="p-6 space-y-4">
+          <div class="flex items-center justify-between text-xs">
+            <span class="text-purple-400 font-semibold">Multi-Agent / 工作流</span>
+            <span class="text-slate-500">2025</span>
+          </div>
+          <h3 class="text-lg font-bold text-white group-hover:text-purple-400 transition-colors">
+            多代理人協作自動化開發系統
+          </h3>
+          <p class="text-sm text-slate-400 leading-relaxed">
+            架構基於 MCP (Model Context Protocol) 的多 Agent 分工網絡，將需求分析、程式碼編寫、測試驗證全流程自動化執行。
+          </p>
+          <div class="flex flex-wrap gap-1.5 pt-2">
+            <span class="px-2 py-0.5 rounded-md bg-slate-800 text-slate-300 text-xs font-mono">Python</span>
+            <span class="px-2 py-0.5 rounded-md bg-slate-800 text-slate-300 text-xs font-mono">MCP Protocol</span>
+            <span class="px-2 py-0.5 rounded-md bg-slate-800 text-slate-300 text-xs font-mono">Docker</span>
+            <span class="px-2 py-0.5 rounded-md bg-slate-800 text-slate-300 text-xs font-mono">AsyncIO</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience Section -->
+  <section id="experience" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-slate-800/60">
+    <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+      <h2 class="text-xs font-bold uppercase tracking-widest text-brand-400">Career</h2>
+      <p class="text-3xl font-extrabold text-white">工作經歷與歷程</p>
+    </div>
+
+    <div class="max-w-3xl mx-auto space-y-8 relative before:absolute before:inset-0 before:left-4 sm:before:left-1/2 before:w-0.5 before:-ml-px before:bg-slate-800">
+      <!-- Item 1 -->
+      <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+        <div class="flex items-center justify-center w-8 h-8 rounded-full bg-brand-500/20 border-2 border-brand-500 text-brand-400 shadow-md shrink-0 sm:order-1 sm:group-odd:-translate-x-1/2 sm:group-even:translate-x-1/2 z-10">
+          <i data-lucide="check" class="w-4 h-4"></i>
+        </div>
+        <div class="w-[calc(100%-3rem)] sm:w-[calc(50%-2.5rem)] glass-card p-5 rounded-2xl">
+          <span class="text-xs font-semibold text-brand-400">2024 - 至今</span>
+          <h4 class="text-base font-bold text-white mt-1">資深 AI 解決方案架構師</h4>
+          <p class="text-xs text-slate-400 mb-2">TechVision AI Innovations</p>
+          <p class="text-xs text-slate-300 leading-relaxed">主導企業級生成式 AI 產品架構設計，整合多模態模型與自研 RAG 引擎，提升客戶客服回應速度 300%。</p>
+        </div>
+      </div>
+
+      <!-- Item 2 -->
+      <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+        <div class="flex items-center justify-center w-8 h-8 rounded-full bg-slate-800 border-2 border-slate-600 text-slate-400 shadow-md shrink-0 sm:order-1 sm:group-odd:-translate-x-1/2 sm:group-even:translate-x-1/2 z-10">
+          <i data-lucide="briefcase" class="w-4 h-4"></i>
+        </div>
+        <div class="w-[calc(100%-3rem)] sm:w-[calc(50%-2.5rem)] glass-card p-5 rounded-2xl">
+          <span class="text-xs font-semibold text-slate-400">2021 - 2024</span>
+          <h4 class="text-base font-bold text-white mt-1">全端工程師 (Full-Stack Engineer)</h4>
+          <p class="text-xs text-slate-400 mb-2">CloudScale Software Inc.</p>
+          <p class="text-xs text-slate-300 leading-relaxed">負責 SaaS 核心產品研發，優化前端微模組載入效能，並建立高併發 RESTful API 與微服務基礎設施。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-slate-800/60">
+    <div class="max-w-2xl mx-auto text-center space-y-6">
+      <h2 class="text-xs font-bold uppercase tracking-widest text-brand-400">Contact</h2>
+      <p class="text-3xl font-extrabold text-white">期待與您攜手打造卓越產品</p>
+      <p class="text-slate-400 text-sm">無論是專案委託、技術交流或顧問諮詢，都歡迎隨時與我聯繫或直接使用右下角小客服！</p>
+
+      <div class="flex flex-wrap justify-center gap-4 pt-4">
+        <a href="mailto:contact@leo-chen.dev" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-sm font-medium border border-slate-700 flex items-center gap-2 transition-all">
+          <i data-lucide="mail" class="w-4 h-4 text-brand-400"></i>
+          <span>contact@leo-chen.dev</span>
+        </a>
+        <a href="https://github.com/leo30863232956712-creator" target="_blank" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-sm font-medium border border-slate-700 flex items-center gap-2 transition-all">
+          <i data-lucide="github" class="w-4 h-4 text-slate-300"></i>
+          <span>GitHub 個人頁面</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-8 border-t border-slate-900 text-center text-xs text-slate-500">
+    <p>© 2026 Leo Chen. All rights reserved. Deployed seamlessly via GitHub Pages & powered by OpenRouter.</p>
+  </footer>
+
+  <!-- ======================================================== -->
+  <!-- FLOATING AI CHATBOT WIDGET (右下角小客服)                  -->
+  <!-- ======================================================== -->
+
+  <div id="aiChatWidget" class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+    
+    <!-- Chat Window Container -->
+    <div id="chatWindow" class="hidden w-[92vw] sm:w-[410px] h-[580px] max-h-[85vh] glass-card rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-slate-700/80 mb-4 transition-all duration-300">
+      
+      <!-- Chat Header -->
+      <div class="px-4 py-3.5 bg-slate-900/90 border-b border-slate-800 flex items-center justify-between shrink-0">
+        <div class="flex items-center gap-3">
+          <div class="relative">
+            <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-600 to-emerald-400 flex items-center justify-center text-white shadow-md shadow-brand-500/20">
+              <i data-lucide="bot" class="w-5 h-5"></i>
+            </div>
+            <span class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-brand-500 border-2 border-slate-900"></span>
+          </div>
+          <div>
+            <div class="text-sm font-bold text-white flex items-center gap-1.5">
+              <span>Leo AI 智慧特助</span>
+              <span id="gasStatusBadge" class="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-400 font-normal">待設定 GAS</span>
+            </div>
+            <div class="text-[11px] text-slate-400 font-mono">Claude Haiku 5.5 (OpenRouter)</div>
+          </div>
+        </div>
+
+        <!-- Header Actions -->
+        <div class="flex items-center gap-1">
+          <!-- Settings Button -->
+          <button id="toggleSettingsBtn" onclick="toggleSettingsPanel()" title="設定 GAS 網址" class="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors">
+            <i data-lucide="settings" class="w-4 h-4"></i>
+          </button>
+          <!-- Clear Chat -->
+          <button onclick="clearChatHistory()" title="清除紀錄" class="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors">
+            <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+          </button>
+          <!-- Close Window -->
+          <button onclick="toggleChat(false)" title="收合視窗" class="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors">
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Settings Dropdown Panel (GAS URL Configuration) -->
+      <div id="settingsPanel" class="hidden px-4 py-3 bg-slate-900 border-b border-slate-800 text-xs space-y-2.5 shrink-0 transition-all">
+        <div class="flex items-center justify-between">
+          <span class="font-semibold text-slate-200 flex items-center gap-1.5">
+            <i data-lucide="sliders" class="w-3.5 h-3.5 text-brand-400"></i>
+            <span>Google Apps Script (GAS) 後端設定</span>
+          </span>
+          <span class="text-[10px] text-slate-500">儲存於本機</span>
+        </div>
+        <p class="text-[11px] text-slate-400 leading-normal">
+          請貼上您在 Google Apps Script 部署為「網頁應用程式 (Web App)」所產生的網址：
+        </p>
+        <div class="space-y-1.5">
+          <input 
+            type="text" 
+            id="gasUrlInput" 
+            placeholder="https://script.google.com/macros/s/.../exec" 
+            class="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-700 text-slate-200 placeholder-slate-500 text-xs focus:outline-none focus:border-brand-500 font-mono transition-colors"
+          />
+        </div>
+        <div class="flex items-center justify-between pt-1">
+          <button onclick="testGasConnection()" class="px-2.5 py-1.5 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] transition-colors flex items-center gap-1">
+            <i data-lucide="activity" class="w-3 h-3 text-brand-400"></i>
+            <span>測試連線</span>
+          </button>
+          <button onclick="saveGasUrl()" class="px-3 py-1.5 rounded-md bg-brand-600 hover:bg-brand-500 text-white font-medium text-[11px] shadow-sm transition-colors flex items-center gap-1">
+            <i data-lucide="save" class="w-3 h-3"></i>
+            <span>保存設定</span>
+          </button>
+        </div>
+        <div id="settingsNotice" class="text-[11px] hidden pt-1"></div>
+      </div>
+
+      <!-- Chat Messages Scroll Area -->
+      <div id="chatMessages" class="flex-1 overflow-y-auto p-4 space-y-4 text-xs">
+        <!-- Initial Assistant Greeting -->
+        <div class="flex items-start gap-2.5">
+          <div class="w-7 h-7 rounded-lg bg-brand-600/30 text-brand-400 border border-brand-500/30 flex items-center justify-center shrink-0">
+            <i data-lucide="bot" class="w-4 h-4"></i>
+          </div>
+          <div class="bg-slate-800/90 border border-slate-700/80 rounded-2xl rounded-tl-sm p-3.5 text-slate-200 max-w-[85%] space-y-2 leading-relaxed shadow-sm">
+            <p>您好！我是 Leo Chen 的 AI 個人特助 🤖</p>
+            <p>我可以向您介紹 Leo 的專業技能、專案作品、經歷背景，也能解答您的任何技術諮詢！</p>
+            <div id="setupPromptCard" class="mt-2.5 p-2 rounded-lg bg-slate-900/90 border border-amber-500/30 text-[11px] text-amber-300/90 flex items-start gap-2">
+              <i data-lucide="info" class="w-4 h-4 text-amber-400 shrink-0 mt-0.5"></i>
+              <div>
+                <span>尚未綁定後端！請點擊右上角 <button onclick="toggleSettingsPanel(true)" class="underline font-semibold hover:text-white">⚙️ 設定鈕</button> 填入您的 Google Apps Script 網址即可啟用對話。</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Typing Indicator (Hidden by default) -->
+      <div id="typingIndicator" class="hidden px-4 py-2 bg-slate-900/50 border-t border-slate-800/50 flex items-center gap-2 text-xs text-slate-400">
+        <div class="flex gap-1 items-center">
+          <span class="w-1.5 h-1.5 rounded-full bg-brand-400 animate-bounce"></span>
+          <span class="w-1.5 h-1.5 rounded-full bg-brand-400 animate-bounce" style="animation-delay: 0.2s"></span>
+          <span class="w-1.5 h-1.5 rounded-full bg-brand-400 animate-bounce" style="animation-delay: 0.4s"></span>
+        </div>
+        <span class="text-[11px] font-mono text-brand-300">Claude 正在思考並組織回答...</span>
+      </div>
+
+      <!-- Chat Input Area -->
+      <div class="p-3 bg-slate-900/90 border-t border-slate-800 shrink-0">
+        <form id="chatForm" onsubmit="handleSendMessage(event)" class="flex items-center gap-2">
+          <input 
+            type="text" 
+            id="chatInput" 
+            placeholder="輸入您的訊息..." 
+            autocomplete="off"
+            class="flex-1 px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-slate-200 placeholder-slate-500 text-xs focus:outline-none focus:border-brand-500 transition-colors"
+          />
+          <button 
+            type="submit" 
+            id="sendBtn"
+            class="w-9 h-9 rounded-xl bg-brand-600 hover:bg-brand-500 text-white flex items-center justify-center transition-all disabled:opacity-50 disabled:cursor-not-allowed shrink-0 shadow-md shadow-brand-600/30"
+          >
+            <i data-lucide="send" class="w-4 h-4"></i>
+          </button>
+        </form>
+      </div>
+
+    </div>
+
+    <!-- Floating Robot Trigger Button -->
+    <button 
+      id="chatToggleBtn" 
+      onclick="toggleChat()" 
+      class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-brand-600 to-emerald-400 text-white flex items-center justify-center shadow-xl shadow-brand-500/25 hover:shadow-brand-500/40 hover:scale-105 transition-all group relative"
+      aria-label="開啟客服"
+    >
+      <i data-lucide="bot" class="w-7 h-7 group-hover:rotate-6 transition-transform"></i>
+      <!-- Unread indicator pulse -->
+      <span class="absolute -top-1 -right-1 flex h-4 w-4">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-4 w-4 bg-brand-500 border-2 border-dark-950"></span>
+      </span>
+    </button>
+
+  </div>
+
+  <!-- JavaScript Logic for AI Chatbot & OpenRouter/GAS Integration -->
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // State Variables
+    let isChatOpen = false;
+    let isSettingsOpen = false;
+    let isGenerating = false;
+    let conversationHistory = []; // Preserves multi-turn messages including reasoning_details
+
+    const STORAGE_KEY_GAS_URL = 'leo_portfolio_gas_url';
+
+    // DOM Elements
+    const chatWindow = document.getElementById('chatWindow');
+    const settingsPanel = document.getElementById('settingsPanel');
+    const gasUrlInput = document.getElementById('gasUrlInput');
+    const gasStatusBadge = document.getElementById('gasStatusBadge');
+    const settingsNotice = document.getElementById('settingsNotice');
+    const setupPromptCard = document.getElementById('setupPromptCard');
+    const chatMessages = document.getElementById('chatMessages');
+    const chatInput = document.getElementById('chatInput');
+    const typingIndicator = document.getElementById('typingIndicator');
+    const sendBtn = document.getElementById('sendBtn');
+
+    // On Load Initialization
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedUrl = localStorage.getItem(STORAGE_KEY_GAS_URL);
+      if (savedUrl) {
+        gasUrlInput.value = savedUrl;
+        updateGasStatus(true);
+      } else {
+        updateGasStatus(false);
+      }
+    });
+
+    // Update Status Badge
+    function updateGasStatus(isConfigured) {
+      if (isConfigured) {
+        gasStatusBadge.className = 'text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-normal';
+        gasStatusBadge.textContent = 'GAS 已連線';
+        if (setupPromptCard) setupPromptCard.style.display = 'none';
+      } else {
+        gasStatusBadge.className = 'text-[10px] px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-400 font-normal';
+        gasStatusBadge.textContent = '待設定 GAS';
+        if (setupPromptCard) setupPromptCard.style.display = 'flex';
+      }
+    }
+
+    // Toggle Chat Window
+    function toggleChat(forceState) {
+      if (typeof forceState === 'boolean') {
+        isChatOpen = forceState;
+      } else {
+        isChatOpen = !isChatOpen;
+      }
+
+      if (isChatOpen) {
+        chatWindow.classList.remove('hidden');
+        setTimeout(() => chatInput.focus(), 150);
+      } else {
+        chatWindow.classList.add('hidden');
+      }
+    }
+
+    // Toggle Settings Panel
+    function toggleSettingsPanel(forceState) {
+      if (typeof forceState === 'boolean') {
+        isSettingsOpen = forceState;
+      } else {
+        isSettingsOpen = !isSettingsOpen;
+      }
+
+      if (isSettingsOpen) {
+        settingsPanel.classList.remove('hidden');
+        gasUrlInput.focus();
+      } else {
+        settingsPanel.classList.add('hidden');
+      }
+    }
+
+    // Save GAS URL to LocalStorage
+    function saveGasUrl() {
+      const url = gasUrlInput.value.trim();
+      if (!url) {
+        showNotice('請輸入有效的 Google Apps Script 網址', 'text-rose-400');
+        return;
+      }
+      if (!url.startsWith('https://script.google.com/')) {
+        showNotice('警告：網址通常應以 https://script.google.com/ 開頭', 'text-amber-400');
+      }
+      localStorage.setItem(STORAGE_KEY_GAS_URL, url);
+      updateGasStatus(true);
+      showNotice('✅ 設定已保存至瀏覽器！', 'text-emerald-400');
+      setTimeout(() => {
+        toggleSettingsPanel(false);
+      }, 1200);
+    }
+
+    // Test GAS Connection (GET)
+    async function testGasConnection() {
+      const url = gasUrlInput.value.trim();
+      if (!url) {
+        showNotice('請先輸入 GAS 網址', 'text-rose-400');
+        return;
+      }
+      showNotice('正在測試連線中...', 'text-slate-400');
+      try {
+        const response = await fetch(url, { method: 'GET' });
+        const data = await response.json();
+        showNotice(`✅ 連線成功！伺服器回應：${data.status || 'OK'}`, 'text-emerald-400');
+      } catch (err) {
+        showNotice(`⚠️ 連線測試提醒：${err.message || '無法連線，請確認部署權限為所有人(Anyone)'}`, 'text-amber-400');
+      }
+    }
+
+    function showNotice(msg, colorClass) {
+      settingsNotice.className = `text-[11px] block pt-1 ${colorClass}`;
+      settingsNotice.textContent = msg;
+    }
+
+    // Clear Chat History
+    function clearChatHistory() {
+      if (confirm('確定要清除目前的對話紀錄嗎？')) {
+        conversationHistory = [];
+        const initialBubble = chatMessages.firstElementChild;
+        chatMessages.innerHTML = '';
+        if (initialBubble) chatMessages.appendChild(initialBubble);
+      }
+    }
+
+    // Append Message to UI
+    function appendMessage(role, content, reasoningDetails = null) {
+      const wrapper = document.createElement('div');
+      wrapper.className = role === 'user' ? 'flex justify-end' : 'flex items-start gap-2.5';
+
+      if (role === 'user') {
+        wrapper.innerHTML = `
+          <div class="bg-brand-600 text-white rounded-2xl rounded-tr-sm px-4 py-2.5 max-w-[85%] leading-relaxed shadow-sm break-words">
+            ${escapeHtml(content)}
+          </div>
+        `;
+      } else {
+        let reasoningHtml = '';
+        if (reasoningDetails) {
+          const reasoningStr = typeof reasoningDetails === 'object' ? JSON.stringify(reasoningDetails, null, 2) : reasoningDetails;
+          reasoningHtml = `
+            <details class="mb-2 p-2 rounded-lg bg-slate-900/80 border border-slate-700/60 text-[11px] text-slate-400">
+              <summary class="cursor-pointer text-brand-400 font-mono font-medium hover:underline select-none">
+                💭 思考過程 (Reasoning Details)
+              </summary>
+              <pre class="mt-2 text-[10px] whitespace-pre-wrap font-mono text-slate-300 max-h-40 overflow-y-auto">${escapeHtml(reasoningStr)}</pre>
+            </details>
+          `;
+        }
+
+        const parsedContent = marked.parse(content || '');
+        wrapper.innerHTML = `
+          <div class="w-7 h-7 rounded-lg bg-brand-600/30 text-brand-400 border border-brand-500/30 flex items-center justify-center shrink-0">
+            <i data-lucide="bot" class="w-4 h-4"></i>
+          </div>
+          <div class="bg-slate-800/90 border border-slate-700/80 rounded-2xl rounded-tl-sm p-3.5 text-slate-200 max-w-[85%] space-y-1.5 leading-relaxed shadow-sm break-words prose prose-invert prose-xs">
+            ${reasoningHtml}
+            <div>${parsedContent}</div>
+          </div>
+        `;
+      }
+
+      chatMessages.appendChild(wrapper);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+      lucide.createIcons();
+    }
+
+    // Send Message Handler
+    async function handleSendMessage(e) {
+      e.preventDefault();
+      const message = chatInput.value.trim();
+      if (!message || isGenerating) return;
+
+      const gasUrl = localStorage.getItem(STORAGE_KEY_GAS_URL);
+      if (!gasUrl) {
+        toggleSettingsPanel(true);
+        showNotice('⚠️ 請先填入並儲存您的 GAS 網址才能開始對話！', 'text-amber-400');
+        return;
+      }
+
+      // Add user message to UI
+      appendMessage('user', message);
+      chatInput.value = '';
+      
+      // Update Conversation History (format required by OpenRouter API with reasoning)
+      conversationHistory.push({
+        role: 'user',
+        content: message
+      });
+
+      // UI Loading State
+      isGenerating = true;
+      typingIndicator.classList.remove('hidden');
+      sendBtn.disabled = true;
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+
+      try {
+        // Send POST request to Google Apps Script
+        // Using text/plain prevents CORS preflight OPTIONS rejection in GAS
+        const response = await fetch(gasUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'text/plain;charset=utf-8'
+          },
+          body: JSON.stringify({
+            messages: conversationHistory,
+            model: 'anthropic/claude-haiku-5.5'
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error(`伺服器回應錯誤 (狀態碼: ${response.status})`);
+        }
+
+        const data = await response.json();
+
+        if (data.error) {
+          throw new Error(typeof data.error === 'string' ? data.error : JSON.stringify(data.error));
+        }
+
+        const replyContent = data.content || '(未回傳文字)';
+        const reasoningDetails = data.reasoning_details || null;
+
+        // Append assistant message to UI
+        appendMessage('assistant', replyContent, reasoningDetails);
+
+        // Preserve reasoning_details in conversation history as specified for multi-turn reasoning
+        conversationHistory.push({
+          role: 'assistant',
+          content: replyContent,
+          reasoning_details: reasoningDetails
+        });
+
+      } catch (err) {
+        console.error('Chat error:', err);
+        appendMessage('assistant', `⚠️ 連線錯誤：${err.message}\n\n請檢查：\n1. Google Apps Script 網址是否正確\n2. GAS 部署權限是否設為「所有人 (Anyone)」\n3. 指令碼屬性中的 OPENROUTER_API_KEY 是否已正確設定。`);
+      } finally {
+        isGenerating = false;
+        typingIndicator.classList.add('hidden');
+        sendBtn.disabled = false;
+        chatInput.focus();
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
+    }
+
+    // Helper: HTML escape
+    function escapeHtml(string) {
+      if (!string) return '';
+      return String(string)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+  </script>
+</body>
+</html>
